@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans" xmlns="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+   
+   <http use-expressions="true">
+      <!-- Rajoitetaan tiettyjä sivuja tietyille käyttäjärooleille -->
+      <intercept-url pattern="/user" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
+      <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
+      <!-- 403-sivun määrittely -->
+      <access-denied-handler error-page="/403" />
+      <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password" />
+      <logout logout-success-url="/login?logout" />
+      <!-- Spring Security 4:stä lähtien CSRF -suojausta ei tarvitse erikseen määritellä. -->
+   </http>
+   
+   <authentication-manager>
+      <!-- Autentikaatio ilman tietokantaa -->
+      <authentication-provider>
+         <user-service>
+            <user name="user1" password="12345" authorities="ROLE_USER" />
+            <user name="admin1" password="12345" authorities="ROLE_USER, ROLE_ADMIN" />
+         </user-service>
+      </authentication-provider>
+      <!-- Autentikaatio tietokannalla -->
+      <authentication-provider>
+         <jdbc-user-service data-source-ref="dataSource" 
+         	users-by-username-query="select username,password, enabled from users where username=?" 
+         	authorities-by-username-query="select username, role from user_roles where username =?" />
+      </authentication-provider>
+   </authentication-manager>
+   
+</beans:beans>
