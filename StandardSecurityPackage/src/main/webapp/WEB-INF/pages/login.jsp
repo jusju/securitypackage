@@ -8,7 +8,7 @@
       <p>Ilman tietokantaa: user1 12345 (käyttäjällä on ROLE_USER) TAI admin1 12345 (käyttäjällä on ROLE_USER ja ROLE_ADMIN)</p>
       <p>Tietokantayhteydellä: jukka 123457 (ROLE_USER) TAI inka 123456 (ROLE_USER ja ROLE_ADMIN) </p>
    <body onload='document.loginForm.username.focus();'>
-      <div id="login-box">
+      <div>
          <h3>${message}</h3>
          <c:if test="${not empty error}">
             <div class="error">${error}</div>
