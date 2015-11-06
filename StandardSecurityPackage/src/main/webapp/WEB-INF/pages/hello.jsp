@@ -14,6 +14,9 @@
          <h3>
             <a href="<c:url value="/login"/>">Kirjaudu sisään</a>
          </h3>
+         <h3>
+            <a href="<c:url value="/registration"/>">Rekisteröidy</a>
+         </h3>
       </sec:authorize>
       
       <!-- Näkymä sisäänkirjautuneelle käyttäjälle, jolla on ROLE_USER-->

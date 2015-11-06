@@ -3,7 +3,7 @@
    
    <http use-expressions="true">
       <!-- Rajoitetaan tiettyjä sivuja tietyille käyttäjärooleille -->
-      <intercept-url pattern="/user" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
+      <intercept-url pattern="/user" access="hasAnyRole('ROLE_USER, ROLE_ADMIN')" />
       <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
       <!-- 403-sivun määrittely -->
       <access-denied-handler error-page="/403" />
@@ -15,17 +15,24 @@
    <authentication-manager>
       <!-- Autentikaatio ilman tietokantaa -->
       <authentication-provider>
+         <password-encoder ref="encoder"/>
          <user-service>
-            <user name="user1" password="12345" authorities="ROLE_USER" />
-            <user name="admin1" password="12345" authorities="ROLE_USER, ROLE_ADMIN" />
+            <user name="user1" password="$2a$10$4acKXtsNYLX5Dqq6ccV/OevLF3ppFwzfvq3UsfKlY.cPsDBpJxdG." authorities="ROLE_USER" />
+            <user name="admin1" password="$2a$10$1zQc./Mx82ktwc73yfQhvuWQY1UtBXegoHcJy.kxIobJh3eavoQrG" authorities="ROLE_USER, ROLE_ADMIN" />
          </user-service>
       </authentication-provider>
       <!-- Autentikaatio tietokannalla -->
       <authentication-provider>
+      	 <password-encoder ref="encoder"/>
          <jdbc-user-service data-source-ref="dataSource" 
          	users-by-username-query="select username,password, enabled from users where username=?" 
          	authorities-by-username-query="select username, role from user_roles where username =?" />
       </authentication-provider>
    </authentication-manager>
+   
+    <beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+	   <beans:constructor-arg name="strength" value="11" />
+    </beans:bean>
+    
    
 </beans:beans>

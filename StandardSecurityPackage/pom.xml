@@ -11,6 +11,8 @@
       <jdk.version>1.8</jdk.version>
       <springframework.version>4.2.2.RELEASE</springframework.version>
       <springsecurity.version>4.0.2.RELEASE</springsecurity.version>
+      <hibernate.validator.version>5.1.2.Final</hibernate.validator.version>
+      <javax.validation.version>1.1.0.Final</javax.validation.version>
       <jstl.version>1.2</jstl.version>
       <mysql.connector.version>5.1.30</mysql.connector.version>
       <servletapi.version>3.1.0</servletapi.version>
@@ -35,8 +37,19 @@
          <artifactId>spring-webmvc</artifactId>
          <version>${springframework.version}</version>
       </dependency>
+      <!-- Validation -->
       <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${javax.validation.version}</version>
+        </dependency>
+      <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.validator.version}</version>
+      </dependency>
       <!-- Database -->
+      <dependency>
          <groupId>org.springframework</groupId>
          <artifactId>spring-jdbc</artifactId>
          <version>${springframework.version}</version>
@@ -82,6 +95,11 @@
          <artifactId>javax.servlet.jsp-api</artifactId>
          <version>2.3.1</version>
       </dependency>
+      <dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
       <!-- MariaDB -->
       <dependency>
          <groupId>org.jumpmind.symmetric.jdbc</groupId>

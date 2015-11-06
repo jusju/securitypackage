@@ -1,7 +1,7 @@
 INSERT INTO users(username,password,enabled)
-VALUES ('inka','123456', true);
+VALUES ('inka','$2a$10$YzdijZUJhEIVpbTG9qijB.SSQ478fJpgbTbYxBDeQ9o4JMm6.ZdHy', true);
 INSERT INTO users(username,password,enabled)
-VALUES ('jukka','123457', true);
+VALUES ('jukka','$2a$10$fjOVHXiM.pRLtPNjGtYuqeIItKthayCxFZLmCG57szka.QuPvRvBe', true);
 
 INSERT INTO user_roles (username, role)
 VALUES ('inka', 'ROLE_USER');
