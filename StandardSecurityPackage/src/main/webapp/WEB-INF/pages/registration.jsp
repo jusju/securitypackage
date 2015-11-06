@@ -12,6 +12,7 @@
 	<h3>${message}</h3>
 	<form:form modelAttribute="user" action="registration" method="POST" enctype="utf8">
         <br>
+        <table>
         <tr>
         <td><label>Käyttäjänimi</label>
         </td>
@@ -24,6 +25,7 @@
         <td><form:input path="password" value="" type="password" /></td>
         <form:errors path="password"/>
     </tr>
+    </table>
         <button type="submit">Rekisteröidy</button>
     </form:form>
     
