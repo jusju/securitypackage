@@ -117,10 +117,6 @@ public class MainController {
 	public String forgotPassword(@Valid User user,
 			BindingResult result, ModelMap model) {
 
-		if (result.hasErrors()) {
-			return "registration";
-		}
-
 		user.setRole("ROLE_USER");
 		getDao().saveUser(user);
 		model.addAttribute("success", " Rekisteröinti tehty tiedoilla: " + user.toString());
