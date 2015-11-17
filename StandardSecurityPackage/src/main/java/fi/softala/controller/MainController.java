@@ -21,7 +21,7 @@ import fi.softala.dao.UserDao;
 /**
  * Sovelluksen controller.
  * 
- * @author Inka Haltiapuu
+ * @author Inka Haltiapuu, Jukka Juslin
  *
  */
 
@@ -112,7 +112,21 @@ public class MainController {
 		model.addAttribute("success", " Rekisteröinti tehty tiedoilla: " + user.toString());
 		return "success";
 	}
+	
+	@RequestMapping(value = "/forgotpassword", method = RequestMethod.POST)
+	public String forgotPassword(@Valid User user,
+			BindingResult result, ModelMap model) {
 
+		if (result.hasErrors()) {
+			return "registration";
+		}
+
+		user.setRole("ROLE_USER");
+		getDao().saveUser(user);
+		model.addAttribute("success", " Rekisteröinti tehty tiedoilla: " + user.toString());
+		return "forgotpassword";
+	}
+	
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public ModelAndView accessDenied() {
 
