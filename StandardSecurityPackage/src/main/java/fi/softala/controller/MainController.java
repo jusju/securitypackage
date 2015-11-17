@@ -21,7 +21,7 @@ import fi.softala.dao.UserDao;
 /**
  * Sovelluksen controller.
  * 
- * @author Inka Haltiapuu, Jukka Juslin
+ * @author Inka Haltiapuu
  *
  */
 
@@ -53,9 +53,9 @@ public class MainController {
 	public ModelAndView userPage() {
 
 		ModelAndView model = new ModelAndView();
-		model.addObject("title", "Käyttäjä-sivu");
+		model.addObject("title", "KÃ¤yttÃ¤jÃ¤-sivu");
 		model.addObject("message",
-				"Tälle sivulle pääsee vain ROLE_USER -roolilla.");
+				"TÃ¤lle sivulle pÃ¤Ã¤see vain ROLE_USER -roolilla.");
 		model.setViewName("user");
 		return model;
 	}
@@ -66,7 +66,7 @@ public class MainController {
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Admin-sivu");
 		model.addObject("message",
-				"Tälle sivulle pääsee vain ROLE_ADMIN -roolilla.");
+				"TÃ¤lle sivulle pÃ¤Ã¤see vain ROLE_ADMIN -roolilla.");
 		model.setViewName("admin");
 		return model;
 	}
@@ -78,12 +78,12 @@ public class MainController {
 
 		ModelAndView model = new ModelAndView();
 		if (error != null) {
-			model.addObject("error", "Virheellinen käyttäjänimi tai salasana.");
+			model.addObject("error", "Virheellinen kÃ¤yttÃ¤jÃ¤nimi tai salasana.");
 		}
 		if (logout != null) {
 			model.addObject("msg", "Olet kirjautunut ulos.");
 		}
-		model.addObject("title", "Sisäänkirjautuminen");
+		model.addObject("title", "SisÃ¤Ã¤nkirjautuminen");
 		model.setViewName("login");
 		return model;
 	}
@@ -93,8 +93,8 @@ public class MainController {
 		ModelAndView model = new ModelAndView();
 		User user = new User();
 		model.addObject("user", user);
-		model.addObject("title", "Rekisteröityminen");
-		model.addObject("message", "Rekisteröidy antamalla käyttäjänimi ja salasana.");
+		model.addObject("title", "RekisterÃ¶ityminen");
+		model.addObject("message", "RekisterÃ¶idy antamalla kÃ¤yttÃ¤jÃ¤nimi ja salasana.");
 		model.setViewName("registration");
 		return model;
 	}
@@ -109,25 +109,15 @@ public class MainController {
 
 		user.setRole("ROLE_USER");
 		getDao().saveUser(user);
-		model.addAttribute("success", " Rekisteröinti tehty tiedoilla: " + user.toString());
+		model.addAttribute("success", " RekisterÃ¶inti tehty tiedoilla: " + user.toString());
 		return "success";
 	}
-	
-	@RequestMapping(value = "/forgotpassword", method = RequestMethod.POST)
-	public String forgotPassword(@Valid User user,
-			BindingResult result, ModelMap model) {
 
-		user.setRole("ROLE_USER");
-		getDao().saveUser(user);
-		model.addAttribute("success", " Rekisteröinti tehty tiedoilla: " + user.toString());
-		return "forgotpassword";
-	}
-	
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public ModelAndView accessDenied() {
 
 		ModelAndView model = new ModelAndView();
-		// printataan konsolille sisäänkirjautuneen käyttäjän tietoja
+		// printataan konsolille sisÃ¤Ã¤nkirjautuneen kÃ¤yttÃ¤jÃ¤n tietoja
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
